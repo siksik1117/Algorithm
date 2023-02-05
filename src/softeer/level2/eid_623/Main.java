@@ -5,36 +5,40 @@ import java.io.*;
 
 public class Main {
 
-
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        String[] secret = br.readLine().split(" ");
-        String[] arr = br.readLine().split(" ");;
-
-        String answer = "normal";
+        int[] limit = new int[101];
+        int k = 0;
 
         for(int i = 0; i < N; i++) {
-            boolean flag;
-            if(arr[i].equals(secret[0])) {
-                flag = true;
-                for(int j = 1; j < M; j++) {
-                    if(i + j >= N) {
-                        flag = false;
-                    } else if (!arr[i+j].equals(secret[j])) {
-                        flag = false;
-                    }
-                }
-                if(flag) {
-                    answer = "secret";
-                }
+            String[] line_N = br.readLine().split(" ");
+            for(int j = k+1; j < k + Integer.parseInt(line_N[0])+1; j++) {
+                limit[j] = Integer.parseInt(line_N[1]);
             }
+            k += Integer.parseInt(line_N[0]);
         }
-        System.out.println(answer);
+
+        int[] spped = new int[101];
+        k = 0;
+
+        for(int i = 0; i < M; i++) {
+            String[] line_N = br.readLine().split(" ");
+            for(int j = k+1; j < k + Integer.parseInt(line_N[0])+1; j++) {
+                spped[j] = Integer.parseInt(line_N[1]);
+            }
+            k += Integer.parseInt(line_N[0]);
+        }
+
+        int result = 0;
+
+        for(int i = 0; i < 101; i++) {
+            result = Math.max(result, spped[i] - limit[i] );
+        }
+        System.out.println(result);
     }
 }
