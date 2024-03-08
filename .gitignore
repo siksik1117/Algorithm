@@ -8,6 +8,7 @@
 /.idea
 Java_Algorithm.iml
 /out
+Algorithm.iml
 
 # User-specific stuff
 .idea/**/workspace.xml
